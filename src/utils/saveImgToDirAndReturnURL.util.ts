@@ -5,6 +5,7 @@ import {nanoid} from 'nanoid/async';
 import { absPathToImgs, relativePathToImgs } from '../configs/pathToFile.config.js';
 
 import {UploadedFile} from 'express-fileupload';
+import ValidationError from '../errors/ValidationError.js';
 
 
 const saveImgToDirAndReturnURL = async (
@@ -18,7 +19,7 @@ const saveImgToDirAndReturnURL = async (
       imgFile.mimetype !== mime.getType('jpeg') &&
       imgFile.mimetype !== mime.getType('webp')
     ) {
-      throw new Error(
+      throw new ValidationError(
         'Можно добавить изображение только с расширеимем .jpeg или .wepb'
       );
     }

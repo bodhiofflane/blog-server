@@ -8,8 +8,6 @@ const getCommentListByParentPostId = async (req: Request, res: Response) => {
     // Если комментариев нет, то получаем пустой массив
     const commentList = await CommentModel.find({parentPostId: parentPostId});
 
-    console.log(Array.isArray(commentList));
-
     res.status(200).json({commentList: commentList, message: 'Комментарии успешно получены'})
   } catch (error) {
     if (error instanceof Error) {

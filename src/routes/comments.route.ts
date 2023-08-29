@@ -20,6 +20,6 @@ router.get('/:id', getCommentListByParentPostId);
 router.put('/:id', updateCommentById);
 
 // Delete comment
-router.delete('/:id', deleteCommentById);
+router.delete('/:id', checkAuth, deleteCommentById);
 
 export default router;

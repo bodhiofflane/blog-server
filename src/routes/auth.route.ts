@@ -33,7 +33,6 @@ router.post(
 router.post(
   '/login',
   (req: Request, res: Response, next: NextFunction) => {
-    console.log("Че тут,", req.body)
     next();
   },
   [

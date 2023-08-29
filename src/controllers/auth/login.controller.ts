@@ -2,7 +2,6 @@ import {Request, Response} from 'express';
 import {validationResult} from 'express-validator';
 import UserModel from '../../models/User.model.js';
 
-import bcrypt from 'bcrypt';
 import createJsonWebToken from '../../utils/createJsonWebToken.util.js';
 import compareHash from '../../utils/compareHash.untils.js';
 import ValidationError from '../../errors/ValidationError.js';
