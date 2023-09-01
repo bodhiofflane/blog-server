@@ -20,8 +20,8 @@ const login = async (req: Request, res: Response) => {
       );
     }
 
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.username as string;
+    const password = req.body.password as string;
 
     const user = await UserModel.findOne({username: username});
 

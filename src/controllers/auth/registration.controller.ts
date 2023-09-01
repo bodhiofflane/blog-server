@@ -9,7 +9,6 @@ import createJsonWebToken from "../../utils/createJsonWebToken.util.js";
 
 import ValidationError from "../../errors/ValidationError.js";
 import InternalServerError from '../../errors/InternalServerError.js';
-import mongoose from 'mongoose';
 
 const registration = async (req: Request, res: Response) => {
   try {
@@ -41,8 +40,6 @@ const registration = async (req: Request, res: Response) => {
       avatarURL,
     });
 
-    console.log(newUser);
-
     const token = await createJsonWebToken(
       newUser.id,
       newUser.username as string,
@@ -50,7 +47,7 @@ const registration = async (req: Request, res: Response) => {
     );
 
     // Свойство id этого объекта - приведенное к строке свойство _id.
-    res.status(201).json({
+    return res.status(201).json({
       user: {
         id: newUser.id,
         username: newUser.username,
@@ -64,15 +61,15 @@ const registration = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof ValidationError) {
       console.error(error.message);
-      res.status(400).json({message: error.message});
+      return res.status(400).json({message: error.message});
     }
     if (error instanceof InternalServerError) {
       console.error(error.message);
-      res.status(500).json({message: error.message});
+      return res.status(500).json({message: error.message});
     }
     if (error instanceof Error) {
       console.error(error.message);
-      res.status(500).json({ message: error.message });
+      return res.status(500).json({ message: error.message });
     }
   }
 };
